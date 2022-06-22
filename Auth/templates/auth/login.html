@@ -1,0 +1,20 @@
+{% extends 'main.html' %}
+
+{% block title %} Login {% endblock %}
+
+{% block content %}
+    <h1>Login:</h1>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="InputUser" class="form-label">Username:</label>
+            <input type="text" class="form-control" id="InputUser" aria-describedby="emailHelp" name="username">
+        </div>
+        <div class="mb-3">
+            <label for="InputPassword" class="form-label">Password:</label>
+            <input type="password" class="form-control" id="InputPassword" name="password">
+        </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% endblock  %}

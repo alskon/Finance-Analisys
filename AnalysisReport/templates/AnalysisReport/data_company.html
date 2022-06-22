@@ -1,0 +1,34 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}
+    {{ company }}
+{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+{% endblock %}
+
+{% block content %}
+    <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+                <h1 class="navbar-brand">Financial Analysis</h1>
+                <h5>Name - {{ user | capfirst }} &nbsp&nbsp||&nbsp&nbsp Company - {{ company | capfirst }}</h5>
+                <a href="{% url 'start' %}">Back</a>
+            </div>
+        </nav>
+    <form class="form-report" action="" method="POST">
+        {% csrf_token  %}
+            {{ sfp_list|safe }}
+
+            {{ sc_list|safe }}
+        <div class="form-buttons">
+            <button class="btn btn-success" type="submit">Update</button>
+            <a href="{% url 'finance' user company %}" class="link-analyst">Analyst --></a>
+            <a href="{% url 'delete-company' user company %}" class="link-analyst">Delete company</a>
+        </div>
+
+    </form>
+
+
+
+{% endblock %}

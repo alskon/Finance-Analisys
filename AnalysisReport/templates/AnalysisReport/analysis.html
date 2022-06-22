@@ -1,0 +1,24 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}
+    {{ company|capfirst }}
+{% endblock %}
+{% block styles %}
+    <link type="css" rel="stylesheet" href="{% static 'styles.css' %}">
+{% endblock %}
+{% block content %}
+    <h2 class="header-ratios">Financial Ratios - {{ company }}</h2>
+    <ul class = 'list-group ratios'>
+        {% for name, ratio in ratios.items %}
+            <li>
+                <h3>{{ name|capfirst }}</h3>
+                <span>{{ ratio|stringformat:'0.2f' }}</span>
+            </li>
+
+        {% endfor %}
+    </ul>
+    <div class="block-link-start">
+        <a href="{% url 'start' %}" class="link-start">Return --></a>
+    </div>
+
+{% endblock %}

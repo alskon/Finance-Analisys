@@ -1,0 +1,49 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %} Financial Analysis {% endblock %}
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+{% endblock %}
+{% block content %}
+    {% if active %}
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+                <h1 class="navbar-brand">Financial Analysis</h1>
+                <h5>Name - {{ name | capfirst }}</h5>
+                <a href="{% url 'logout' %}">Quit</a>
+            </div>
+        </nav>
+
+        {% if companies|length %}
+            <h4>Your companies:</h4>
+            {% for company in companies %}
+                <a class="link-company" href="{{ company.url }}">{{ company.company }}</a>
+            {% endfor %}
+        {% else %}
+            <h4>No companies</h4>
+        {% endif %}
+        <form action="" method="POST" class="add-company-form">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label" for="company">Add company:</label>
+                <input class="form-control" type="text" id="company" required name="company">
+            </div>
+            <button type="submit" class="btn btn-success">Add</button>
+        </form>
+
+    {% else %}
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+                <h1 class="navbar-brand">Financial Analysis</h1>
+                <div class="no-login">
+                    <a href="{% url 'login' %}">please Login</a>
+                    <span>or</span>
+                    <a href="{% url 'register' %}">Register</a>
+                </div>
+            </div>
+        </nav>
+    {% endif %}
+    <p>For example login: Test, password: 123qweQWE </p>
+{% endblock %}
+
